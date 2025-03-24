@@ -2,17 +2,20 @@
 
 MailWise is an AI-powered email management system designed to transform the way users interact with their inbox. By leveraging **Google Gemini AI**, MailWise provides a **personalized, efficient, and time-saving** email experience. It seamlessly integrates with Gmail via OAuth & Gmail API, intelligently categorizing emails to **reduce clutter**, **enhance productivity**, and **help users focus on what truly matters**. With custom categories and an intuitive UI, MailWise ensures that managing emails is no longer a hassle but a streamlined experience tailored to individual needs.
 
-## 🚀 Features
-- **AI-powered email categorization** using Google Gemini AI.
-- **Google OAuth & Gmail API integration** for seamless access.
-- **Custom email categories** – users can modify predefined categories and create new ones.
-- **Modern UI** resembling Gmail for intuitive user experience.
-- **Database integration with PostgreSQL** for user and email storage.
-- **Secure authentication** using OAuth 2.0.
+![image](https://github.com/user-attachments/assets/7ecb40db-ec77-490a-b5cc-1cdbaa21ed70)
+
+![image](https://github.com/user-attachments/assets/5037688f-d57b-443f-9e07-51f1e8065428)
+
+
+## Features
+- **AI-Powered Email Classification**: Utilizes Google Gemini AI to classify emails into relevant categories.
+- **Predefined & Custom Categories**: Offers default categories while allowing users to create personalized ones.
+- **Seamless Gmail Integration**: Uses OAuth authentication and Gmail API for secure access.
+- **User-Friendly Interface**: Built with ReactJS and Tailwind CSS for a smooth experience.
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 MailWise/
@@ -46,44 +49,44 @@ Ensure you have the following installed:
 - **Node.js** (v18+ recommended)
 - **PostgreSQL**
 
-### Clone the Repository
-```bash
-git clone https://github.com/lakshyagrg23/hack-o-harbour.git
-cd hack-o-harbour
-```
 
 ### Backend Setup
 ```bash
 cd server
-npm install  # Install dependencies
+npm install
 ```
 
-Create a `.env` file in the `server/` directory with the following:
-```env
-DATABASE_URL=your_postgresql_connection_string
-GMAIL_CLIENT_ID=your_google_client_id
-GMAIL_CLIENT_SECRET=your_google_client_secret
-GMAIL_REDIRECT_URI=your_google_redirect_uri
-JWT_SECRET=your_secret_key
-```
+Configure environment variables:
+   Create a `.env` file in the root directory and add the following:
+   ```sh
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   GOOGLE_REDIRECT_URI=
+
+   DB_USER=
+   DB_HOST=
+   DB_NAME=
+   DB_PASSWORD=
+   DB_PORT=
+   ```
 
 Start the backend server:
 ```bash
-npm start
+node server.js
 ```
 
 ### Frontend Setup
 ```bash
 cd client
-npm install  # Install dependencies
-npm start    # Start the React app
+npm install
+npm start  
 ```
 
 The application should now be running on **http://localhost:3000** (frontend) and **http://localhost:5000** (backend).
 
 ---
 
-## 📌 Usage
+## Usage
 1. **Login with Google** – Authenticate using your Gmail account.
 2. **View categorized emails** – Emails are automatically sorted into predefined & custom categories.
 3. **Create custom categories** – Add new categories based on preferences.
@@ -91,24 +94,15 @@ The application should now be running on **http://localhost:3000** (frontend) an
 
 ---
 
-## 🛠️ Tech Stack
-### **Frontend:**
-- React.js
-- React Router
-- Tailwind CSS
-- Axios
-- Framer Motion (Animations)
-
-### **Backend:**
-- Node.js
-- Express.js
-- PostgreSQL (`pg` library)
-- Google OAuth 2.0
-- Gmail API
+## Technologies Used
+- **Frontend**: ReactJS, Tailwind CSS
+- **Backend**: NodeJS, ExpressJS, PostgreSQL
+- **AI Integration**: Google Gemini AI
+- **External APIs**: Gmail API
 
 ---
 
-## 📜 API Endpoints
+## API Endpoints
 ### **Authentication**
 - `GET /auth/google` – Initiates Google OAuth flow
 - `GET /auth/google/callback` – Handles OAuth callback
@@ -124,7 +118,7 @@ The application should now be running on **http://localhost:3000** (frontend) an
 
 ---
 
-## 📌 Contribution
+##  Contribution
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature-branch`)
 3. Commit your changes (`git commit -m 'Add new feature'`)
@@ -133,12 +127,7 @@ The application should now be running on **http://localhost:3000** (frontend) an
 
 ---
 
-## 📄 License
+## License
 This project is licensed under the MIT License.
 
 ---
-
-## ✨ Acknowledgments
-- Google OAuth & Gmail API Docs
-- PostgreSQL Documentation
-- OpenAI for AI classification inspiration
