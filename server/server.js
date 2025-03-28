@@ -122,7 +122,7 @@ app.get('/fetch-emails/:category', async (req, res) => {
         }
 
         // No stored emails found, fetch from Gmail API
-        const response = await gmail.users.messages.list({ userId: 'me', maxResults: 5 });
+        const response = await gmail.users.messages.list({ userId: 'me', maxResults: 15 });
         const messages = response.data.messages || [];
 
         let emails = [];
@@ -134,14 +134,14 @@ app.get('/fetch-emails/:category', async (req, res) => {
             const subject = headers.find(h => h.name === 'Subject')?.value || 'No Subject';
             const sender = headers.find(h => h.name === 'From')?.value || 'Unknown Sender';
             
-            // ✅ Fetch email body correctly
+            // Fetch email body correctly
             const body = extractBody(msg.data.payload);
             const receivedAt = new Date(parseInt(msg.data.internalDate)).toISOString();
 
             // Delay to respect API limits
             await delay(1000);
 
-            // ✅ Classify email with Gemini AI
+            //  Classify email with Gemini AI
             const emailCategory = await classifyEmailWithGemini(userId,subject, body);
 
             // Store in database
@@ -319,6 +319,20 @@ app.get("/categories/:userId", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+app.delete("/emails/:userId", async (req, res) => {
+    const { userId } = req.params;
+  
+    try {
+      const result = await pool.query("DELETE FROM email_metadata WHERE user_id = $1", [userId]);
+  
+      res.status(200).json({ message: "Emails deleted successfully", deletedRows: result.rowCount });
+    } catch (error) {
+      console.error("Error deleting emails:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+  
 
 // app.put('/categories/:userId/:categoryName', async (req, res) => {
 //     const { userId, categoryName } = req.params;

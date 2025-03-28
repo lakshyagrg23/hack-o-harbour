@@ -114,9 +114,9 @@ const OptionsMenu = () => {
                             <Typography variant="h6" style={{ fontWeight: "bold" }}>
                                 {name}
                             </Typography>
-                            <Typography variant="body2" color="gray">
+                            {/* <Typography variant="body2" color="gray">
                                 lakshya23100@iiitnr.edu.in
-                            </Typography>
+                            </Typography> */}
                         </Box>
                     </Box>
                     <StyledButton fullWidth onClick={() => logout()}>

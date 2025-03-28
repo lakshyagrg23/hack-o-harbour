@@ -47,11 +47,24 @@ const getQueryParam = (param) => {
     return urlParams.get(param);
 };
 
+
+
+
 const SideBarContent = () => {
 const categoryHook = useContext(emailContext);
 const [openDialog, setOpenDialog] = useState(false);
 const [openPopup, setOpenPopup] = useState(false);
 const { type } = useParams();
+
+const getCategoryCount = (categoryName) => {
+    if (!categoryHook.emails || categoryHook.emails.length === 0) return 0;
+
+    if (categoryName === "All") {
+        return categoryHook.emails.length; // Total count for all emails
+    }
+
+    return categoryHook.emails.filter(email => email.category === categoryName).length;
+};
 
 const onComposeClick = () => setOpenDialog(true);
 const handlePopupOpen = () => setOpenPopup(true);
@@ -59,6 +72,32 @@ const handlePopupClose = () => setOpenPopup(false);
 
 const userId = getQueryParam("user_id"); // Extract user ID from URL
 console.log(userId);
+
+const handleConfirmCategoryChanges = async () => {
+    if (!userId) {
+      console.error("Error: userId is missing.");
+      return;
+    }
+  
+    try {
+      // Delete existing email metadata
+      const response = await fetch(`http://localhost:5000/emails/${userId}`, {
+        method: "DELETE",
+      });
+  
+      if (response.ok) {
+        console.log("Old emails deleted successfully.");
+  
+        // Reload the page to fetch fresh data
+        window.location.reload();
+      } else {
+        console.error("Error deleting emails. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error deleting emails:", error);
+    }
+  };
+  
 
 useEffect(() => {
     const fetchCategories = async () => {
@@ -143,20 +182,27 @@ console.log("categories:", categoryHook?.categories); */}
         whileTap={{ scale: 0.95 }}
     >
         <AddCircleIcon fontSize="small" />
-        Add Category
+        Customize Categories
     </motion.button>
 
     {/* 🎨 Category Customization Popup */}
     <Dialog open={openPopup} onClose={handlePopupClose}>
-        <DialogContent>
+    <DialogContent>
         <NewCategory />
-        </DialogContent>
-        <DialogActions>
+    </DialogContent>
+    <DialogActions>
         <Button onClick={handlePopupClose} color="primary">
-            Close
+            Cancel
         </Button>
-        </DialogActions>
-    </Dialog>
+        <Button 
+            onClick={handleConfirmCategoryChanges} 
+            color="secondary"
+            variant="contained"
+        >
+            Confirm
+        </Button>
+    </DialogActions>
+</Dialog>
 
     {/* 📬 Compose Email Popup */}
     <Compose openDialog={openDialog} setOpenDialog={setOpenDialog} />

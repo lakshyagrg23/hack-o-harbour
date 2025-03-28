@@ -73,7 +73,7 @@ const fetchEmailData = async (category) => {
     emails, setEmails, category, setCategory, loaded, setLoaded, 
     selectedUser, setSelectedUser, name, setName, 
     selectedEmails, setSelectedEmails, accessToken,
-    categories, setCategories  // ✅ Add this
+    categories, setCategories 
 }}>
 
 

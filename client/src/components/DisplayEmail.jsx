@@ -202,7 +202,7 @@ const DisplayEmail = ({ email, allow }) => {
             )}
     
             {/* Star Icon */}
-            {email.starred ? (
+            {/* {email.starred ? (
                 <Star fontSize="small" sx={{ marginRight: 2, color: '#F4B400', cursor: 'pointer' }} 
                     onClick={(e) => { e.stopPropagation(); toggleStarred(); }} 
                 />
@@ -210,7 +210,7 @@ const DisplayEmail = ({ email, allow }) => {
                 <StarBorder fontSize="small" sx={{ marginRight: 2, cursor: 'pointer' }} 
                     onClick={(e) => { e.stopPropagation(); toggleStarred(); }} 
                 />
-            )}
+            )} */}
     
             <Box display="flex" alignItems="center" flex="1" overflow="hidden">
                 {/* Sender */}
